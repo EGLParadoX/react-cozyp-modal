@@ -6,9 +6,14 @@ interface ModalProps {
   onClose: () => void;
   isLoading?: boolean;
   children: React.ReactNode;
+  customStyles?: {
+    blocker?: React.CSSProperties;
+    modal?: React.CSSProperties;
+    closeButton?: React.CSSProperties;
+  };
 }
 
-export function Modal({ isOpen, onClose, isLoading, children }: ModalProps) {
+export function Modal({ isOpen, onClose, isLoading, children, customStyles }: ModalProps) {
   if (!isOpen) return null;
 
   if (isLoading) {
@@ -20,13 +25,22 @@ export function Modal({ isOpen, onClose, isLoading, children }: ModalProps) {
   }
 
   return (
-    <div className={styles.blocker} onClick={onClose}>
-      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+    <div 
+      className={styles.blocker} 
+      onClick={onClose}
+      style={customStyles?.blocker}
+    >
+      <div 
+        className={styles.modal} 
+        onClick={(e) => e.stopPropagation()}
+        style={customStyles?.modal}
+      >
         {children}
         <button
           className={styles.closeModal}
           onClick={onClose}
           aria-label="Fermer"
+          style={customStyles?.closeButton}
         >
           &#215;
         </button>
@@ -34,4 +48,3 @@ export function Modal({ isOpen, onClose, isLoading, children }: ModalProps) {
     </div>
   );
 }
-

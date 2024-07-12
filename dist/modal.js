@@ -2166,7 +2166,8 @@ function Modal(_ref) {
   var isOpen = _ref.isOpen,
     onClose = _ref.onClose,
     isLoading = _ref.isLoading,
-    children = _ref.children;
+    children = _ref.children,
+    customStyles = _ref.customStyles;
   if (!isOpen) return null;
   if (isLoading) {
     return react.createElement("div", {
@@ -2175,16 +2176,19 @@ function Modal(_ref) {
   }
   return react.createElement("div", {
     className: styles.blocker,
-    onClick: onClose
+    onClick: onClose,
+    style: customStyles === null || customStyles === void 0 ? void 0 : customStyles.blocker
   }, react.createElement("div", {
     className: styles.modal,
     onClick: function onClick(e) {
       return e.stopPropagation();
-    }
+    },
+    style: customStyles === null || customStyles === void 0 ? void 0 : customStyles.modal
   }, children, react.createElement("button", {
     className: styles.closeModal,
     onClick: onClose,
-    "aria-label": "Fermer"
+    "aria-label": "Fermer",
+    style: customStyles === null || customStyles === void 0 ? void 0 : customStyles.closeButton
   }, "\xD7")));
 }
 
